@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  server_id: 1
+  app_id: 1
+
+two:
+  name: MyString
+  server_id: 1
+  app_id: 1

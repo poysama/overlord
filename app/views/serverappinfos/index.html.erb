@@ -1,0 +1,27 @@
+<h1>Listing serverappinfos</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Server</th>
+    <th>App</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @serverappinfos.each do |serverappinfo| %>
+  <tr>
+    <td><%= serverappinfo.name %></td>
+    <td><%= serverappinfo.server_id %></td>
+    <td><%= serverappinfo.app_id %></td>
+    <td><%= link_to 'Show', serverappinfo %></td>
+    <td><%= link_to 'Edit', edit_serverappinfo_path(serverappinfo) %></td>
+    <td><%= link_to 'Destroy', serverappinfo, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Serverappinfo', new_serverappinfo_path %>
