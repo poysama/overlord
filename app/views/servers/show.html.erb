@@ -8,33 +8,25 @@
 <hr />
 
 <b>APPLICATIONS</b>
-<ul>
+<%= link_to "edit apps for #{@server.name}", server_apps_path(@server) %>
 <% @apps.each do |a| %>
   <li><%= a.name %></li>
 <% end %>
-</ul>
-<%= link_to "edit apps for #{@server.name}", server_apps_path(@server) %>
 
 <hr />
 
 <b>SERVICES</b>
-<ul>
+<%= link_to "edit services for #{@server.name}", server_services_path(@server) %>
 <% @services.each do |s| %>
   <li><%= s.name %></li>
 <% end %>
-</ul>
-<%= link_to "edit services for #{@server.name}", server_services_path(@server) %>
 <hr />
+
 <b>CONNECTIONS</b>
-<% @connections.each do |c| %>
-  <ul>
-    <li><%= c['service_name'] %> -> <%= c['conn_server_name'] %></li>
-  </ul>
-<% end %>
-<br />
 <%= link_to "edit connections for #{@server.name}", server_connections_path(@server) %>
-
+<% @connections.each do |c| %>
+  <li><%= c['service_name'] %> -> <%= c['conn_server_name'] %></li>
+<% end %>
 <p>&nbsp;</p>
-
 <%= link_to 'Edit', edit_server_path(@server) %> |
 <%= link_to 'Back', servers_path %>
