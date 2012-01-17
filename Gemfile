@@ -4,6 +4,9 @@ gem 'rails', '3.1.0'
 
 # Bundle edge Rails instead:
 # gem 'rails',     :git => 'git://github.com/rails/rails.git'
+gem 'puppet_master', :git => 'git://github.com/poymode/puppet_master.git'
+gem 'eventmachine', :git => 'git://github.com/poymode/eventmachine.git'
+gem 'thin'
 
 gem 'mysql2'
 

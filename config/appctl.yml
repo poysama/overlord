@@ -1,0 +1,31 @@
+# for additional options, refer to:
+# ruby script/appctl -h
+
+# - listen on which host and port
+# - can be many
+# - don't support unix domain sockets yet
+listen:
+  - 0.0.0.0:1988
+
+# - disable auto-tailing when daemonizing
+# - important when using with monit or other invocator
+tail: false
+
+# number of servers to load, can be overridden in the cmd opts: -s
+servers: 1
+
+# environment to use (app specific)
+environment: development
+
+tag: development
+
+# where to store the pid file
+pid_file: tmp/pids/appctl.pid
+
+# where to store the log file
+log_file: log/appctl.log
+
+mongrel2:
+  recv: tcp://127.0.0.1:20101
+  send: tcp://127.0.0.1:20102
+  uuid: 534a36f1-5fcb-4636-8aa9-749fae727ad5
