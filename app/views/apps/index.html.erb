@@ -1,5 +1,6 @@
 <h1>Listing apps</h1>
 
+<%= link_to 'Add an app', new_app_path %>
 <% if @server.blank? %>
   <table>
     <tr>
@@ -11,17 +12,15 @@
 
   <% @apps.each do |app| %>
     <tr>
-      <td><ul><li><%= app.name %></li></ul></td>
+      <td><li><%= app.name %></li></td>
       <% if @server.blank? %>
-        <td><%= link_to 'Show', app %></td>
         <td><%= link_to 'Edit', edit_app_path(app) %></td>
-        <td><%= link_to 'Destroy', app, confirm: 'Are you sure?', method: :delete %></td>
+        <td><%# link_to 'Destroy', app, confirm: 'Are you sure?', method: :delete %></td>
       <% end %>
     </tr>
   <% end %>
   </table>
 
-  <%= link_to 'Add an app', new_app_path %>
 <% else %>
   <%= render 'server_apps' %>
 <% end %>

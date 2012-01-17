@@ -1,5 +1,6 @@
 <h1>Listing services</h1>
 
+<%= link_to 'Add a Service', new_service_path %>
 <% if @server.blank? %>
   <table>
     <tr>
@@ -12,16 +13,13 @@
   <% @services.each do |service| %>
     <tr>
       <td><%= service.name %></td>
-      <td><%= link_to 'Show', service %></td>
       <td><%= link_to 'Edit', edit_service_path(service) %></td>
-      <td><%= link_to 'Destroy', service, confirm: 'Are you sure?', method: :delete %></td>
     </tr>
   <% end %>
   </table>
 
   <br />
 
-  <%= link_to 'New Service', new_service_path %>
 <% else %>
   <%= render 'server_services' %>
 <% end %>
