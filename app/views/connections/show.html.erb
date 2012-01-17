@@ -24,16 +24,6 @@
 <% end %>
 </ul>
 <%= link_to "edit services for #{@server.name}", server_services_path(@server) %>
-<hr />
-<b>CONNECTIONS</b>
-<% @connections.each do |c| %>
-  <ul>
-    <li><%= c['service_name'] %> -> <%= c['conn_server_name'] %></li>
-  </ul>
-<% end %>
-<br />
-<%= link_to "edit connections for #{@server.name}", server_connections_path(@server) %>
-
 <p>&nbsp;</p>
 
 <%= link_to 'Edit', edit_server_path(@server) %> |

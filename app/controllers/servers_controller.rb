@@ -1,6 +1,4 @@
 class ServersController < ApplicationController
-  # GET /servers
-  # GET /servers.json
   def index
     @servers = Server.all
 
@@ -10,12 +8,18 @@ class ServersController < ApplicationController
     end
   end
 
-  # GET /servers/1
-  # GET /servers/1.json
   def show
     @server = Server.find(params[:id])
     @apps = @server.apps
     @services = @server.services
+    @connections = []
+
+    @server.connections.each do |c|
+      conn = {}
+      conn['conn_server_name'] = Server.find(c.service_server_id).name
+      conn['service_name'] = Service.find(c.service_id).name
+      @connections << conn
+    end
 
     respond_to do |format|
       format.html # show.html.erb
@@ -23,12 +27,11 @@ class ServersController < ApplicationController
     end
   end
 
-  # GET /servers/new
-  # GET /servers/new.json
   def new
     @server = Server.new
     @apps = App.all
     @services = Service.all
+    @connections = {}
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,19 +39,14 @@ class ServersController < ApplicationController
     end
   end
 
-  # GET /servers/1/edit
   def edit
     @server = Server.find(params[:id])
     @apps = App.all
     @services = Service.all
   end
 
-  # POST /servers
-  # POST /servers.json
   def create
     @server = Server.new(params[:server])
-    @server.apps = App.find_all_by_name(params['apps'])
-    @server.services = Service.find_all_by_name(params['services'])
 
     respond_to do |format|
       if @server.save
@@ -61,12 +59,29 @@ class ServersController < ApplicationController
     end
   end
 
-  # PUT /servers/1
-  # PUT /servers/1.json
   def update
     @server = Server.find(params[:id])
-    @server.apps = App.find_all_by_name(params['apps'])
-    @server.services = Service.find_all_by_name(params['services'])
+    if !params['apps'].blank?
+      @server.apps = App.find_all_by_name(params['apps'])
+    end
+
+    if !params['services'].blank?
+      @server.services = Service.find_all_by_name(params['services'])
+    end
+
+    if !params['conn_server_id'].blank? and !params['service_id'].blank?
+      id_1 = params['conn_server_id']
+      id_2 = params['service_id']
+      conn = Connection.find_by_service_id_and_service_server_id(id_1, id_2)
+
+      if conn.nil?
+        c = Connection.new
+        c.server_id = @server.id
+        c.service_server_id = id_1
+        c.service_id = id_2
+        c.save
+      end
+    end
 
     respond_to do |format|
       if @server.update_attributes(params[:server])

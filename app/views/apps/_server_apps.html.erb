@@ -1,0 +1,14 @@
+<%= form_for(@server) do |f| %>
+  <div class="field">
+    <% @apps.each do |a| %>
+      <% if @server.apps.include? a %>
+        <%= check_box_tag 'apps[]', a.name, true %><%= a.name %>
+      <% else %>
+        <%= check_box_tag 'apps[]', a.name %><%= a.name %>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="actions">
+    <%= f.submit 'Update' %>
+  </div>
+<% end %>

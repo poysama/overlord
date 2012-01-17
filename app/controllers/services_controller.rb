@@ -4,6 +4,10 @@ class ServicesController < ApplicationController
   def index
     @services = Service.all
 
+    if !params['server_id'].blank?
+      @server = Server.find_by_id(params['server_id'])
+    end
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @services }

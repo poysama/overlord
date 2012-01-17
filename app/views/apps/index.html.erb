@@ -1,23 +1,27 @@
 <h1>Listing apps</h1>
 
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+<% if @server.blank? %>
+  <table>
+    <tr>
+      <th>Name</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
 
-<% @apps.each do |app| %>
-  <tr>
-    <td><%= app.name %></td>
-    <td><%= link_to 'Show', app %></td>
-    <td><%= link_to 'Edit', edit_app_path(app) %></td>
-    <td><%= link_to 'Destroy', app, confirm: 'Are you sure?', method: :delete %></td>
-  </tr>
+  <% @apps.each do |app| %>
+    <tr>
+      <td><ul><li><%= app.name %></li></ul></td>
+      <% if @server.blank? %>
+        <td><%= link_to 'Show', app %></td>
+        <td><%= link_to 'Edit', edit_app_path(app) %></td>
+        <td><%= link_to 'Destroy', app, confirm: 'Are you sure?', method: :delete %></td>
+      <% end %>
+    </tr>
+  <% end %>
+  </table>
+
+  <%= link_to 'Add an app', new_app_path %>
+<% else %>
+  <%= render 'server_apps' %>
 <% end %>
-</table>
-
-<br />
-
-<%= link_to 'New App', new_app_path %>

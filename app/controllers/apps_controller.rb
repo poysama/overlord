@@ -1,8 +1,12 @@
 class AppsController < ApplicationController
-  # GET /apps
-  # GET /apps.json
   def index
     @apps = App.all
+
+    if !has_server?
+      @server = Server.find_by_id(params['server_id'])
+    end
+
+    @app = App.new
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,8 +14,6 @@ class AppsController < ApplicationController
     end
   end
 
-  # GET /apps/1
-  # GET /apps/1.json
   def show
     @app = App.find(params[:id])
 
@@ -21,10 +23,14 @@ class AppsController < ApplicationController
     end
   end
 
-  # GET /apps/new
-  # GET /apps/new.json
   def new
+    @apps = []
     @app = App.new
+
+    if !has_server?
+      @apps = App.all
+      @server = Server.find_by_id(params['server_id'])
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -32,13 +38,17 @@ class AppsController < ApplicationController
     end
   end
 
-  # GET /apps/1/edit
   def edit
-    @app = App.find(params[:id])
+    @apps = []
+
+    if !has_server?
+      @apps = App.all
+      @server = Server.find_by_id(params['server_id'])
+    else
+      @app = App.find(params[:id])
+    end
   end
 
-  # POST /apps
-  # POST /apps.json
   def create
     @app = App.new(params[:app])
 
@@ -53,10 +63,13 @@ class AppsController < ApplicationController
     end
   end
 
-  # PUT /apps/1
-  # PUT /apps/1.json
   def update
-    @app = App.find(params[:id])
+    if @server.blank?
+      @app = App.find(params[:id])
+    else
+      apps = App.find_all_by_name(params['apps'])
+      @server.apps = apps
+    end
 
     respond_to do |format|
       if @app.update_attributes(params[:app])
@@ -79,5 +92,9 @@ class AppsController < ApplicationController
       format.html { redirect_to apps_url }
       format.json { head :ok }
     end
+  end
+
+  def has_server?
+    params['server_id'].blank?
   end
 end

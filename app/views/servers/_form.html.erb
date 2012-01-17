@@ -15,31 +15,6 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-  <h2>Edit Apps</h2>
-  <div class="field">
-    <% @apps.each do |a| %>
-      <% if @server.apps.include? a %>
-        <%= check_box_tag 'apps[]', a.name, true %><%= a.name %>
-      <% else %>
-        <%= check_box_tag 'apps[]', a.name %><%= a.name %>
-      <% end %>
-    <% end %>
-  </div>
-  <h2>Edit Services</h2>
-  <div class="field">
-    <% @services.each do |s| %>
-      <% if @server.services.include? s %>
-        <%= check_box_tag 'services[]', s.name, true %><%= s.name %>
-      <% else %>
-        <%= check_box_tag 'services[]', s.name %><%= s.name %>
-      <% end %>
-    <% end %>
-  </div>
-
-  <h2>Edit Connections</h2>
-  <div class="field">
-
-  </div>
 
   <div class="actions">
     <%= f.submit %>

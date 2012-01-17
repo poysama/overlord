@@ -1,0 +1,12 @@
+<h1>Listing connections</h1>
+
+<% @connections.each do |c| %>
+  <ul>
+    <li>
+      <%= link_to '[X]', server_connection_path(@server, c['id']), confirm: 'Are you sure?', method: :delete %>
+      <%= c['service_name'] %> -> <%= c['conn_server_name'] %>
+    </li>
+  </ul>
+<% end %>
+
+<%= render 'form' %>

@@ -1,13 +1,15 @@
 Overlord::Application.routes.draw do
-  resources :serverserviceinfos
+#  resources :serverserviceinfos
 
   resources :services
 
-  resources :serverappinfos
+#  resources :serverappinfos
 
   resources :apps
 
-  resources :servers
+  resources :servers do
+    resources :apps, :services, :connections
+  end
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
@@ -58,7 +60,7 @@ Overlord::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   # just remember to delete public/index.html.
-  # root :to => 'welcome#index'
+  root :to => 'servers#index'
 
   # See how all your routes lay out with "rake routes"
 
