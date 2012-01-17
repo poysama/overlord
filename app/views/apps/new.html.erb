@@ -14,18 +14,8 @@
   <% end %>
 
   <div class="field">
-    <% if @apps.empty? %>
-      <%= f.label :name %><br />
-      <%= f.text_field :name %>
-    <% else %>
-      <% @apps.each do |a| %>
-        <% if @server.apps.include? a %>
-          <%= check_box_tag 'apps[]', a.name, true %><%= a.name %>
-        <% else %>
-          <%= check_box_tag 'apps[]', a.name %><%= a.name %>
-        <% end %>
-      <% end %>
-    <% end %>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
   </div>
   <div class="actions">
     <%= f.submit %>
