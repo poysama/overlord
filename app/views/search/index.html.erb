@@ -1,0 +1,41 @@
+<div class="content">
+  <h3>
+    Search results:
+  </h3>
+  <p>&nbsp;</p>
+  <% if !@result.blank? %>
+    <% case @search_type %>
+    <% when 'application' %>
+      <%= @result.name %> is found on these servers:
+        <% @servers.each do |s| %>
+          <li><%= s.name %></li>
+        <% end %>
+    <% when 'server' %>
+      Server <%= @result.name %> serves:
+        <% @services.each do |s| %>
+          <li><%= s.name %></li>
+        <% end %>
+      <br />
+      Hosted applications:
+        <% @apps.each do |a| %>
+          <li><%= a.name %></li>
+        <% end %>
+    <% when 'service' %>
+      <%= @result.name %> is found on these servers:
+        <% @servers.each do |s| %>
+          <li><%= s.name %></li>
+        <% end %>
+    <% end %>
+  <% else %>
+    <div align="center">
+      <%= image_tag('sad_alien.png') %><br />
+      The alien cannot find<br />
+        <b>
+          Searched term: <%= @search_type %><br />
+          Type: <%= @search_name %>
+        </b>
+      <br />
+      The alien is sorry for your lack of searching skills.
+    </div>
+  <% end %>
+</div>

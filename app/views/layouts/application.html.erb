@@ -7,11 +7,25 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-<%= link_to 'Servers', servers_path %> |
-<%= link_to 'Services', services_path %> |
-<%= link_to 'Applications', apps_path %>
+  <div class="main">
+    <div class="nav_bar" align="center">
+      <%= link_to image_tag('server_icon.png', :size => '50x50', :title => 'Servers', :class => 'nav_bar_item'), servers_path %>
+      <%= link_to image_tag('service_icon.png', :size => '50x50', :title => 'Services', :class => 'nav_bar_item'), services_path %>
+      <%= link_to image_tag('app_icon.png', :size => '50x50', :title => 'Applications', :class => 'nav_bar_item'), apps_path %>
+      <%= link_to image_tag('location.png', :size => '50x50', :title => 'Locations', :class => 'nav_bar_item'), locations_path %>
 
-<%= yield %>
+      <div class="search_form">
+        <%= form_tag('/search', :method => :get) do %>
+          <%= text_field_tag :search_name, nil, :placeholder => "Search" %>
+          <%= select_tag("search_type",  options_for_select(OverlordConstants::SEARCH_TYPES), :include_blank => true) %>
+          <%= image_submit_tag "search.png", :class => 'search_button' %>
+        <% end %>
+      </div>
+    </div>
 
+    <div class="content_container">
+      <%= yield %>
+    </div>
+  </div>
 </body>
 </html>

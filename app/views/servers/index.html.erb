@@ -1,19 +1,25 @@
-<h1>Listing servers</h1>
+<div class="content">
+  <%= link_to image_tag('add.png', :size => '35x35', :style => 'vertical-align: middle;'), new_server_path %>
+  <b>Servers</b>
+  <p>&nbsp;</p>
 
-<%= link_to 'New Server', new_server_path %>
-<table>
-  <tr>
-    <th>Name</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
+  <ul id="list">
+    <% @servers.each_with_index do |server, i| %>
+      <li>
+        <%= link_to image_tag('edit.png', :size => '30x30'), edit_server_path(server) %>
+        <%= link_to server.name, server_path(server) %>
+      </li>
+    <% end %>
+  </ul>
+</div>
 
-<% @servers.each do |server| %>
-  <tr>
-    <td><%= link_to server.name.upcase, server_path(server) %></td>
-    <td>|<%= link_to 'Edit', edit_server_path(server) %></td>
-  </tr>
-<% end %>
-</table>
+<script type="text/javascript">
+  (function(jQuery){
+    var $ = jQuery;
+    $(window).load(function(){
 
+      list_columns(jQuery('#list'), 10);
+
+    });
+  })(jQuery);
+</script>

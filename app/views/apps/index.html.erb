@@ -1,25 +1,28 @@
-<% if @server.blank? %>
-<h1>Listing apps</h1>
-<%= link_to 'Add an app', new_app_path %>
-  <table>
-    <tr>
-      <th>Name</th>
-      <th></th>
-      <th></th>
-      <th></th>
-    </tr>
-
+<div class="content">
+  <% if @server.blank? %>
+  <%= link_to image_tag('add.png', :size => '30x30'), new_app_path %>
+  <b>Applications</b>
+  <p>&nbsp;</p>
+  <ul id="list">
   <% @apps.each do |app| %>
-    <tr>
-      <td><li><%= app.name %></li></td>
-      <% if @server.blank? %>
-        <td><%= link_to 'Edit', edit_app_path(app) %></td>
-        <td><%# link_to 'Destroy', app, confirm: 'Are you sure?', method: :delete %></td>
-      <% end %>
-    </tr>
+    <li>
+      <%= link_to image_tag('edit.png', :size => '30x30'), edit_app_path(app) %>
+      <%= app.name %>
+    </li>
   <% end %>
-  </table>
+  </ul>
+  <% else %>
+    <%= render 'server_apps' %>
+  <% end %>
+</div>
 
-<% else %>
-  <%= render 'server_apps' %>
-<% end %>
+<script type="text/javascript">
+  (function(jQuery){
+    var $ = jQuery;
+    $(window).load(function(){
+
+      list_columns(jQuery('#list'), 10);
+
+    });
+  })(jQuery);
+</script>

@@ -1,15 +1,33 @@
-<h1>Services for <%= @server.name %></h1>
-<%= form_for(@server) do |f| %>
-  <div class="field">
-    <% @services.each do |s| %>
-      <% if @server.services.include? s %>
-        <%= check_box_tag 'services[]', s.name, true %><%= s.name %>
-      <% else %>
-        <%= check_box_tag 'services[]', s.name %><%= s.name %>
-      <% end %>
-    <% end %>
-  </div>
-  <div class="actions">
-    <%= f.submit 'Update' %>
-  </div>
-<% end %>
+<div class="content">
+  <h1>Services for <%= @server.name %></h1>
+  <%= form_for(@server) do |f| %>
+    <div class="field">
+      <ul id="list">
+        <% @services.each do |s| %>
+          <li>
+          <% if @server.services.include? s %>
+            <%= check_box_tag 'services[]', s.name, true %><%= s.name %>
+          <% else %>
+            <%= check_box_tag 'services[]', s.name %><%= s.name %>
+          <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </div>
+    <p>&nbsp;</p>
+    <div class="actions">
+      <%= f.submit 'Update' %>
+    </div>
+  <% end %>
+</div>
+
+<script type="text/javascript">
+  (function(jQuery){
+    var $ = jQuery;
+    $(window).load(function(){
+
+      list_columns(jQuery('#list'), 5);
+
+    });
+  })(jQuery);
+</script>

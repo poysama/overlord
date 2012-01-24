@@ -4,6 +4,7 @@ class Server < ActiveRecord::Base
   has_many :serverserviceinfos
   has_many :services, :through => :serverserviceinfos
   has_many :connections
+  belongs_to :location
 
   validates_presence_of :name
   validates_uniqueness_of :name

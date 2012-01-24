@@ -1,32 +1,48 @@
-<p id="notice"><%= notice %></p>
+<div class="content">
+  <p id="notice"><%= notice %></p>
+  <div class="entry">
+    <%= link_to image_tag("edit.png", :size => "25x25"), edit_server_path(@server) %>
+    <b>SERVER</b><br />
+    <b>Name:</b>
+    <%= @server.name %><br />
+    <b>Location:</b>
+    <%= @server.location.name %><br />
+    <b>Description</b>
+    <%= @server.description %>
+  </div>
 
-<p>
-  <b>Name:</b>
-  <%= @server.name %>
-</p>
+  <div class="entry">
+    <%= link_to image_tag("edit.png", :size => "25x25"), server_apps_path(@server) %>
+    <b>APPLICATIONS</b>
+    <% @apps.each do |a| %>
+      <li><%= a.name %></li>
+    <% end %>
+  </div>
 
-<hr />
+  <div class="entry">
+    <%= link_to image_tag("edit.png", :size => "25x25"), server_services_path(@server) %>
+    <b>SERVICES</b>
+    <% @services.each do |s| %>
+      <li><%= s.name %></li>
+    <% end %>
+  </div>
 
-<b>APPLICATIONS</b>
-<%= link_to "edit apps for #{@server.name}", server_apps_path(@server) %>
-<% @apps.each do |a| %>
-  <li><%= a.name %></li>
-<% end %>
-
-<hr />
-
-<b>SERVICES</b>
-<%= link_to "edit services for #{@server.name}", server_services_path(@server) %>
-<% @services.each do |s| %>
-  <li><%= s.name %></li>
-<% end %>
-<hr />
-
-<b>CONNECTIONS</b>
-<%= link_to "edit connections for #{@server.name}", server_connections_path(@server) %>
-<% @connections.each do |c| %>
-  <li><%= c['service_name'] %> -> <%= c['conn_server_name'] %></li>
-<% end %>
-<p>&nbsp;</p>
-<%= link_to 'Edit', edit_server_path(@server) %> |
-<%= link_to 'Back', servers_path %>
+  <div class="entry">
+    <%= link_to image_tag("edit.png", :size => "25x25"), server_connections_path(@server) %>
+    <b>CONNECTIONS</b>
+    <table border="1" cellspacing="0">
+      <tr>
+        <th>Service</th>
+        <th>Server</th>
+        <th>Last touch</th>
+      </tr>
+    <% @connections.each do |c| %>
+      <tr>
+        <td><%= c['service_name'] %></td>
+        <td><%= c['conn_server_name'] %></td>
+        <td><%= c['updated_at'] %></td>
+      </tr>
+    <% end %>
+    </table>
+  </div>
+</div>

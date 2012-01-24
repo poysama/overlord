@@ -8,6 +8,7 @@ class ConnectionsController < ApplicationController
     @server.connections.each do |c|
       conn = {}
       conn['id'] = c.id
+      conn['updated_at'] = c.updated_at
       conn['conn_server_name'] = Server.find(c.service_server_id).name
       conn['service_name'] = Service.find(c.service_id).name
       @connections << conn

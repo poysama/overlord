@@ -10,9 +10,9 @@
       </ul>
     </div>
   <% end %>
-
+  <p>&nbsp;</p>
   <h3>Make a connection</h3>
-  <div class="field">
+  <div class="entry">
     Pick a service:
     <%= select(nil, "service_id", @services.collect {|p| [ p.name, p.id ] }, { :include_blank => true }) %>
     Pick a server:

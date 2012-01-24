@@ -1,4 +1,7 @@
 Overlord::Application.routes.draw do
+  resources :locations
+  resources :search
+
 #  resources :serverserviceinfos
 
   resources :services

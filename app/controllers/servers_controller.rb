@@ -16,6 +16,7 @@ class ServersController < ApplicationController
 
     @server.connections.each do |c|
       conn = {}
+      conn['updated_at'] = c.updated_at
       conn['conn_server_name'] = Server.find(c.service_server_id).name
       conn['service_name'] = Service.find(c.service_id).name
       @connections << conn
@@ -32,6 +33,7 @@ class ServersController < ApplicationController
     @apps = App.all
     @services = Service.all
     @connections = {}
+    @locations = Location.all
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,10 +45,13 @@ class ServersController < ApplicationController
     @server = Server.find(params[:id])
     @apps = App.all
     @services = Service.all
+    @locations = Location.all
   end
 
   def create
     @server = Server.new(params[:server])
+    @locations = Location.all
+    @server.location = Location.find(params['location_id']) if !@server.blank?
 
     respond_to do |format|
       if @server.save
@@ -82,6 +87,8 @@ class ServersController < ApplicationController
         c.save
       end
     end
+
+    @server.location = Location.find(params['location_id']) if !@server.blank?
 
     respond_to do |format|
       if @server.update_attributes(params[:server])

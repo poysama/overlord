@@ -5,3 +5,105 @@
  *= require_self
  *= require_tree . 
 */
+* {
+  margin: 0 0 0 0;
+  font-family: Lucida Grande;
+}
+
+img {
+  vertical-align: middle;
+}
+
+body {
+}
+
+.field {
+  font-size: 12px;
+}
+
+.nav_bar {
+  font-size: 20px;
+  background-color: rgb(153,204,255);
+  height: 60px;
+  -webkit-border-bottom-right-radius: 10px;
+  -webkit-border-bottom-left-radius: 10px;
+  -moz-border-radius-bottomright: 10px;
+  -moz-border-radius-bottomleft: 10px;
+  border-bottom-right-radius: 10px;
+  border-bottom-left-radius: 10px;
+}
+
+.nav_bar_item {
+  margin-top: 5px;
+  vertical-align: middle;
+}
+
+div.main {
+  margin: auto;
+  width: 900px;
+}
+
+div.content_container {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  margin-top: 10px;
+  background-color: rgb(92,173,255)
+}
+
+div.content {
+  padding: 20px;
+}
+
+div.entry {
+  padding: 10px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  border: 1px solid rgb(230,230,230);
+  background-color: rgb(153,204,255);
+  margin-bottom: 10px;
+}
+
+table tr td {
+  padding: 5px;
+}
+
+a {
+  text-decoration: none;
+  color: rgb(0,0,0);
+}
+a:hover {
+  background-color: none;
+}
+
+div.search_form {
+  float: right;
+  margin-top: 10px;
+  margin-right: 30px;
+}
+
+.search_button {
+  height: 20px;
+  width: 20px;
+  vertical-align: bottom;
+}
+
+.proxy_list{
+  overflow: hidden;
+}
+.proxy_list .list_col{
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: rgb(153,204,255);
+  border: 1px solid rgb(230,230,230);
+  display: block;
+  float: left;
+  list-style: none;
+  margin-right: 10px;
+}
+.proxy_list .list_col li{
+  display: block;
+}
