@@ -82,7 +82,7 @@ class ServersController < ApplicationController
     if !params['conn_server_id'].blank? and !params['service_id'].blank?
       id_1 = params['conn_server_id']
       id_2 = params['service_id']
-      conn = Connection.find_by_service_id_and_service_server_id(id_1, id_2)
+      conn = Connection.find_by_server_id_and_service_id_and_service_server_id(@server.id, id_1, id_2)
 
       if conn.nil?
         c = Connection.new
