@@ -16,7 +16,7 @@ class ServersController < ApplicationController
 
     @server.connections.each do |c|
       conn = {}
-      conn['updated_at'] = Time.now.since(c.updated_at)
+      conn['updated_at'] = c.updated_at
       conn['conn_server_name'] = Server.find(c.service_server_id).name
       conn['service_name'] = Service.find(c.service_id).name
       @connections << conn
