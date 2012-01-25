@@ -8,7 +8,7 @@ class ConnectionsController < ApplicationController
     @server.connections.each do |c|
       conn = {}
       conn['id'] = c.id
-      conn['updated_at'] = distance_of_time_in_words(c.updated_at, Time.now)
+      conn['updated_at'] = Time.now.since(c.updated_at)
       conn['conn_server_name'] = Server.find(c.service_server_id).name
       conn['service_name'] = Service.find(c.service_id).name
       @connections << conn
