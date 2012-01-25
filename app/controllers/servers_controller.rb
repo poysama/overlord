@@ -16,7 +16,7 @@ class ServersController < ApplicationController
 
     @server.connections.each do |c|
       conn = {}
-      conn['updated_at'] = c.updated_at
+      conn['updated_at'] = Time.now.since(c.updated_at)
       conn['conn_server_name'] = Server.find(c.service_server_id).name
       conn['service_name'] = Service.find(c.service_id).name
       @connections << conn
@@ -66,12 +66,17 @@ class ServersController < ApplicationController
 
   def update
     @server = Server.find(params[:id])
-    if !params['apps'].blank?
+
+    if params.include?('apps') and !params['apps'].blank?
       @server.apps = App.find_all_by_name(params['apps'])
+    else
+      @server.apps.destroy_all if params['current_form'] == 'apps'
     end
 
-    if !params['services'].blank?
+    if params.include?('services') and !params['services'].blank?
       @server.services = Service.find_all_by_name(params['services'])
+    else
+      @server.services.destroy_all if params['current_form'] == 'services'
     end
 
     if !params['conn_server_id'].blank? and !params['service_id'].blank?
@@ -88,7 +93,11 @@ class ServersController < ApplicationController
       end
     end
 
-    @server.location = Location.find(params['location_id']) if !@server.blank?
+    if !@server.blank?
+      if !params['location_id'].blank?
+        @server.location = Location.find(params['location_id'])
+      end
+    end
 
     respond_to do |format|
       if @server.update_attributes(params[:server])
